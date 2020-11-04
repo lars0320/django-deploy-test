@@ -1,8 +1,6 @@
 //카운터 게임
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import jQuery, { param } from "jquery";
-window.$ = window.jQuery = jQuery
 
 class Counter extends React.Component {
   constructor(props) {

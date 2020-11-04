@@ -1,19 +1,6 @@
 //룰렛게임
 import React from 'react';
 import ReactDOM from 'react-dom';
-/*import img0 from '/static/0.gif';
-import img1 from '/static/1.gif';
-import img2 from '/static/2.gif';
-import img3 from '/static/3.gif';
-import img4 from '/static/4.gif';
-import img5 from '/static/5.gif';
-import img6 from '/static/6.gif';
-import img7 from '/static/7.gif';
-import img8 from '/static/8.gif';
-import img9 from '/static/9.gif'; */
-import jQuery from "jquery";
-window.$ = window.jQuery = jQuery;
-
 
 class Rulet extends React.Component {
   constructor (props) {
@@ -35,6 +22,16 @@ class Rulet extends React.Component {
       stopCount1: 0,
       stopCount2: 0,
       stopCount3: 0,
+      img0: '/static/0.gif',
+      img1: '/static/1.gif',
+      img2: '/static/2.gif',
+      img3: '/static/3.gif',
+      img4: '/static/4.gif',
+      img5: '/static/5.gif',
+      img6: '/static/6.gif',
+      img7: '/static/7.gif',
+      img8: '/static/8.gif',
+      img9: '/static/9.gif',
     };
     this.gameStart = this.gameStart.bind(this);
     this.bettingChange = this.bettingChange.bind(this);
@@ -71,63 +68,63 @@ class Rulet extends React.Component {
             text : "배팅후 점수는"+this.state.score+"점 이구요, "+this.state.betting+"배팅하셨네요"
           })
           this.state.interval1 = setInterval(() => {
-            if (this.state.image1 == '/static/1.gif') {
+            if (this.state.image1 == this.state.img1) {
               this.setState({
-                image1: '/static/2.gif'
+                image1: this.state.img2
               })
               this.state.count1 = 2
             } else {
-              if (this.state.image1 == '/static/2.gif') {
+              if (this.state.image1 == this.state.img2) {
                 this.setState({
-                  image1: '/static/3.gif'
+                  image1: this.state.img3
                 })
                 this.state.count1 = 3
               } else {
-                if (this.state.image1 == '/static/3.gif') {
+                if (this.state.image1 == this.state.img3) {
                   this.setState({
-                    image1: '/static/4.gif'
+                    image1: this.state.img4
                   })
                   this.state.count1 = 4
                 } else {
-                  if (this.state.image1 == '/static/4.gif') {
+                  if (this.state.image1 == this.state.img4) {
                     this.setState({
-                      image1: '/static/5.gif'
+                      image1: this.state.img5
                     })
                     this.state.count1 = 5
                   } else {
-                    if (this.state.image1 == '/static/5.gif') {
+                    if (this.state.image1 == this.state.img5) {
                       this.setState({
-                        image1: '/static/6.gif'
+                        image1: this.state.img6
                       })
                       this.state.count1 = 6
                     } else {
-                      if (this.state.image1 == '/static/6.gif') {
+                      if (this.state.image1 == this.state.img6) {
                         this.setState({
-                          image1: '/static/7.gif'
+                          image1: this.state.img7
                         })
                         this.state.count1 = 7
                       } else {
-                        if (this.state.image1 == '/static/7.gif') {
+                        if (this.state.image1 == this.state.img7) {
                           this.setState({
-                            image1: '/static/8.gif'
+                            image1: this.state.img8
                           })
                           this.state.count1 = 8
                         } else {
-                          if (this.state.image1 == '/static/8.gif') {
+                          if (this.state.image1 == this.state.img8) {
                             this.setState({
-                              image1: '/static/9.gif'
+                              image1: this.state.img9
                             })
                             this.state.count1 = 9
                           } else {
-                            if (this.state.image1 == '/static/9.gif') {
+                            if (this.state.image1 == this.state.img9) {
                               this.setState({
-                                image1: '/static/0.gif'
+                                image1: this.state.img0
                               })
                               this.state.count1 = 0
                             } else {
-                              if (this.state.image1 == '/static/0.gif') {
+                              if (this.state.image1 == this.state.img0) {
                                 this.setState({
-                                  image1: '/static/1.gif'
+                                  image1: this.state.img1
                                 })
                                 this.state.count1 = 1
                               }
@@ -142,63 +139,63 @@ class Rulet extends React.Component {
             }
           }, 40);
           this.state.interval2 = setInterval(() => {
-            if (this.state.image2 == '/static/1.gif') {
+            if (this.state.image2 == this.state.img1) {
               this.setState({
-                image2: '/static/2.gif'
+                image2: this.state.img2
               })
               this.state.count2 = 2
             } else {
-              if (this.state.image2 == '/static/2.gif') {
+              if (this.state.image2 == this.state.img2) {
                 this.setState({
-                  image2: '/static/3.gif'
+                  image2: this.state.img3
                 })
                 this.state.count2 = 3
               } else {
-                if (this.state.image2 == '/static/3.gif') {
+                if (this.state.image2 == this.state.img3) {
                   this.setState({
-                    image2: '/static/4.gif'
+                    image2: this.state.img4
                   })
                   this.state.count2 = 4
                 } else {
-                  if (this.state.image2 == '/static/4.gif') {
+                  if (this.state.image2 == this.state.img4) {
                     this.setState({
-                      image2: '/static/5.gif'
+                      image2: this.state.img5
                     })
                     this.state.count2 = 5
                   } else {
-                    if (this.state.image2 == '/static/5.gif') {
+                    if (this.state.image2 == this.state.img5) {
                       this.setState({
-                        image2: '/static/6.gif'
+                        image2: this.state.img6
                       })
                       this.state.count2 = 6
                     } else {
-                      if (this.state.image2 == '/static/6.gif') {
+                      if (this.state.image2 == this.state.img6) {
                         this.setState({
-                          image2: '/static/7.gif'
+                          image2: this.state.img7
                         })
                         this.state.count2 = 7
                       } else {
-                        if (this.state.image2 == '/static/7.gif') {
+                        if (this.state.image2 == this.state.img7) {
                           this.setState({
-                            image2: '/static/8.gif'
+                            image2: this.state.img8
                           })
                           this.state.count2 = 8
                         } else {
-                          if (this.state.image2 == '/static/8.gif') {
+                          if (this.state.image2 == this.state.img8) {
                             this.setState({
-                              image2: '/static/9.gif'
+                              image2: this.state.img9
                             })
                             this.state.count2 = 9
                           } else {
-                            if (this.state.image2 == '/static/9.gif') {
+                            if (this.state.image2 == this.state.img9) {
                               this.setState({
-                                image2: '/static/0.gif'
+                                image2: this.state.img0
                               })
                               this.state.count2 = 0
                             } else {
-                              if (this.state.image2 == '/static/0.gif') {
+                              if (this.state.image2 == this.state.img0) {
                                 this.setState({
-                                  image2: '/static/1.gif'
+                                  image2: this.state.img1
                                 })
                                 this.state.count2 = 1
                               }
@@ -213,63 +210,63 @@ class Rulet extends React.Component {
             }
           }, 35);
           this.state.interval3 = setInterval(() => {
-            if (this.state.image3 == '/static/1.gif') {
+            if (this.state.image3 == this.state.img1) {
               this.setState({
-                image3: '/static/2.gif'
+                image3: this.state.img2
               })
               this.state.count3 = 2
             } else {
-              if (this.state.image3 == '/static/2.gif') {
+              if (this.state.image3 == this.state.img2) {
                 this.setState({
-                  image3: '/static/3.gif'
+                  image3: this.state.img3
                 })
                 this.state.count3 = 3
               } else {
-                if (this.state.image3 == '/static/3.gif') {
+                if (this.state.image3 == this.state.img3) {
                   this.setState({
-                    image3: '/static/4.gif'
+                    image3: this.state.img4
                   })
                   this.state.count3 = 4
                 } else {
-                  if (this.state.image3 == '/static/4.gif') {
+                  if (this.state.image3 == this.state.img4) {
                     this.setState({
-                      image3: '/static/5.gif'
+                      image3: this.state.img5
                     })
                     this.state.count3 = 5
                   } else {
-                    if (this.state.image3 == '/static/5.gif') {
+                    if (this.state.image3 == this.state.img5) {
                       this.setState({
-                        image3: '/static/6.gif'
+                        image3: this.state.img6
                       })
                       this.state.count3 = 6
                     } else {
-                      if (this.state.image3 == '/static/6.gif') {
+                      if (this.state.image3 == this.state.img6) {
                         this.setState({
-                          image3: '/static/7.gif'
+                          image3: this.state.img7
                         })
                         this.state.count3 = 7
                       } else {
-                        if (this.state.image3 == '/static/7.gif') {
+                        if (this.state.image3 == this.state.img7) {
                           this.setState({
-                            image3: '/static/8.gif'
+                            image3: this.state.img8
                           })
                           this.state.count3 = 8
                         } else {
-                          if (this.state.image3 == '/static/8.gif') {
+                          if (this.state.image3 == this.state.img8) {
                             this.setState({
-                              image3: '/static/9.gif'
+                              image3: this.state.img9
                             })
                             this.state.count3 = 9
                           } else {
-                            if (this.state.image3 == '/static/9.gif') {
+                            if (this.state.image3 == this.state.img9) {
                               this.setState({
-                                image3: '/static/0.gif'
+                                image3: this.state.img0
                               })
                               this.state.count3 = 0
                             } else {
-                              if (this.state.image3 == '/static/0.gif') {
+                              if (this.state.image3 == this.state.img0) {
                                 this.setState({
-                                  image3: '/static/1.gif'
+                                  image3: this.state.img1
                                 })
                                 this.state.count3 = 1
                               }
@@ -289,6 +286,10 @@ class Rulet extends React.Component {
       return null;
     }
 
+  }
+
+  ruletrun() {
+    
   }
 
   bettingChange(point) {

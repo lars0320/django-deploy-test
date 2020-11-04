@@ -1,10 +1,7 @@
 //숫자맞추기
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import jQuery, { param } from "jquery";
-import { max } from 'lodash';
 
-window.$ = window.jQuery = jQuery
 
 class HighAndLow extends React.Component {
   constructor(props){
