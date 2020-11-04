@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import jQuery, { param } from "jquery";
-window.$ = window.jQuery = jQuery
 
 
 class Index extends Component {
@@ -26,6 +24,7 @@ class Index extends Component {
     );
   }
 }
+
 ReactDOM.render(
-  <Index />,
-  document.getElementById('index'));    
+<Index />,
+document.getElementById('index'));
