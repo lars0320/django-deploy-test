@@ -8,9 +8,11 @@ class Rulet extends React.Component {
     this.state = {
       score: 50,
       progressCount: 0,
+      image: null,
       image1: '/static/7.gif',
       image2: '/static/7.gif',
       image3: '/static/7.gif',
+      count: null,
       count1: 7,
       count2: 7,
       count3: 7,
@@ -40,15 +42,17 @@ class Rulet extends React.Component {
     this.img3Stop = this.img3Stop.bind(this);
     this.stop = this.stop.bind(this);
     this.notProgress = this.notProgress.bind(this);
+    this.imageChange = this.imageChange.bind(this);
+    this.countChange = this.countChange.bind(this);
   }
 
 
   gameStart(point) {
     point.preventDefault();
     if (this.state.progressCount == 0) {
-      this.state.image1 = '/static/7.gif'
-      this.state.image2 = '/static/7.gif'
-      this.state.image3 = '/static/7.gif'
+      this.state.image1 = this.state.img7
+      this.state.image2 = this.state.img7
+      this.state.image3 = this.state.img7
       this.state.stopCount1 = 0
       this.state.stopCount2 = 0
       this.state.stopCount3 = 0
@@ -67,218 +71,14 @@ class Rulet extends React.Component {
           this.setState({
             text : "배팅후 점수는"+this.state.score+"점 이구요, "+this.state.betting+"배팅하셨네요"
           })
-          this.state.interval1 = setInterval(() => {
-            if (this.state.image1 == this.state.img1) {
-              this.setState({
-                image1: this.state.img2
-              })
-              this.state.count1 = 2
-            } else {
-              if (this.state.image1 == this.state.img2) {
-                this.setState({
-                  image1: this.state.img3
-                })
-                this.state.count1 = 3
-              } else {
-                if (this.state.image1 == this.state.img3) {
-                  this.setState({
-                    image1: this.state.img4
-                  })
-                  this.state.count1 = 4
-                } else {
-                  if (this.state.image1 == this.state.img4) {
-                    this.setState({
-                      image1: this.state.img5
-                    })
-                    this.state.count1 = 5
-                  } else {
-                    if (this.state.image1 == this.state.img5) {
-                      this.setState({
-                        image1: this.state.img6
-                      })
-                      this.state.count1 = 6
-                    } else {
-                      if (this.state.image1 == this.state.img6) {
-                        this.setState({
-                          image1: this.state.img7
-                        })
-                        this.state.count1 = 7
-                      } else {
-                        if (this.state.image1 == this.state.img7) {
-                          this.setState({
-                            image1: this.state.img8
-                          })
-                          this.state.count1 = 8
-                        } else {
-                          if (this.state.image1 == this.state.img8) {
-                            this.setState({
-                              image1: this.state.img9
-                            })
-                            this.state.count1 = 9
-                          } else {
-                            if (this.state.image1 == this.state.img9) {
-                              this.setState({
-                                image1: this.state.img0
-                              })
-                              this.state.count1 = 0
-                            } else {
-                              if (this.state.image1 == this.state.img0) {
-                                this.setState({
-                                  image1: this.state.img1
-                                })
-                                this.state.count1 = 1
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+          this.state.interval1 = setInterval(( ) => {
+            this.ruletrun(this.state.image1, this.state.count1, 1)
           }, 40);
           this.state.interval2 = setInterval(() => {
-            if (this.state.image2 == this.state.img1) {
-              this.setState({
-                image2: this.state.img2
-              })
-              this.state.count2 = 2
-            } else {
-              if (this.state.image2 == this.state.img2) {
-                this.setState({
-                  image2: this.state.img3
-                })
-                this.state.count2 = 3
-              } else {
-                if (this.state.image2 == this.state.img3) {
-                  this.setState({
-                    image2: this.state.img4
-                  })
-                  this.state.count2 = 4
-                } else {
-                  if (this.state.image2 == this.state.img4) {
-                    this.setState({
-                      image2: this.state.img5
-                    })
-                    this.state.count2 = 5
-                  } else {
-                    if (this.state.image2 == this.state.img5) {
-                      this.setState({
-                        image2: this.state.img6
-                      })
-                      this.state.count2 = 6
-                    } else {
-                      if (this.state.image2 == this.state.img6) {
-                        this.setState({
-                          image2: this.state.img7
-                        })
-                        this.state.count2 = 7
-                      } else {
-                        if (this.state.image2 == this.state.img7) {
-                          this.setState({
-                            image2: this.state.img8
-                          })
-                          this.state.count2 = 8
-                        } else {
-                          if (this.state.image2 == this.state.img8) {
-                            this.setState({
-                              image2: this.state.img9
-                            })
-                            this.state.count2 = 9
-                          } else {
-                            if (this.state.image2 == this.state.img9) {
-                              this.setState({
-                                image2: this.state.img0
-                              })
-                              this.state.count2 = 0
-                            } else {
-                              if (this.state.image2 == this.state.img0) {
-                                this.setState({
-                                  image2: this.state.img1
-                                })
-                                this.state.count2 = 1
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            this.ruletrun(this.state.image2, this.state.count2, 2)
           }, 35);
           this.state.interval3 = setInterval(() => {
-            if (this.state.image3 == this.state.img1) {
-              this.setState({
-                image3: this.state.img2
-              })
-              this.state.count3 = 2
-            } else {
-              if (this.state.image3 == this.state.img2) {
-                this.setState({
-                  image3: this.state.img3
-                })
-                this.state.count3 = 3
-              } else {
-                if (this.state.image3 == this.state.img3) {
-                  this.setState({
-                    image3: this.state.img4
-                  })
-                  this.state.count3 = 4
-                } else {
-                  if (this.state.image3 == this.state.img4) {
-                    this.setState({
-                      image3: this.state.img5
-                    })
-                    this.state.count3 = 5
-                  } else {
-                    if (this.state.image3 == this.state.img5) {
-                      this.setState({
-                        image3: this.state.img6
-                      })
-                      this.state.count3 = 6
-                    } else {
-                      if (this.state.image3 == this.state.img6) {
-                        this.setState({
-                          image3: this.state.img7
-                        })
-                        this.state.count3 = 7
-                      } else {
-                        if (this.state.image3 == this.state.img7) {
-                          this.setState({
-                            image3: this.state.img8
-                          })
-                          this.state.count3 = 8
-                        } else {
-                          if (this.state.image3 == this.state.img8) {
-                            this.setState({
-                              image3: this.state.img9
-                            })
-                            this.state.count3 = 9
-                          } else {
-                            if (this.state.image3 == this.state.img9) {
-                              this.setState({
-                                image3: this.state.img0
-                              })
-                              this.state.count3 = 0
-                            } else {
-                              if (this.state.image3 == this.state.img0) {
-                                this.setState({
-                                  image3: this.state.img1
-                                })
-                                this.state.count3 = 1
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            this.ruletrun(this.state.image3, this.state.count3, 3)
           }, 30);
         }
       }
@@ -288,8 +88,135 @@ class Rulet extends React.Component {
 
   }
 
-  ruletrun() {
-    
+  ruletrun(img, count, num) {
+    switch (img) {
+      case this.state.img1:
+        img = this.state.img2
+        count = 2
+        this.setState({ 
+          image: this.state.img2,
+          count: count
+        })
+        this.imageChange(num)
+        this.countChange(num)
+        break;
+      case this.state.img2:
+        img = this.state.img3
+        count = 3
+        this.setState({ 
+          image: this.state.img3,
+          count: count
+        })
+        this.imageChange(num)
+        this.countChange(num)
+        break;
+      case this.state.img3:
+        img = this.state.img4
+        count = 4
+        this.setState({ 
+          image: this.state.img4,
+          count: count
+        })
+        this.imageChange(num)
+        this.countChange(num)
+        break;
+      case this.state.img4:
+        img = this.state.img5
+        count = 5
+        this.setState({ 
+          image: this.state.img5,
+          count: count
+        })
+        this.imageChange(num)
+        this.countChange(num)
+        break;
+      case this.state.img5:
+        img = this.state.img6
+        count = 6
+        this.setState({ 
+          image: this.state.img6,
+          count: count
+        })
+        this.imageChange(num)
+        this.countChange(num)
+        break;
+      case this.state.img6:
+        img = this.state.img7
+        count = 7
+        this.setState({ 
+          image: this.state.img7,
+          count: count
+        })
+        this.imageChange(num)
+        this.countChange(num)
+        break;
+      case this.state.img7:
+        img = this.state.img8
+        count = 8
+        this.setState({ 
+          image: this.state.img8,
+          count: count
+        })
+        this.imageChange(num)
+        this.countChange(num)
+        break;
+      case this.state.img8:
+        img = this.state.img9
+        count = 9
+        this.setState({ 
+          image: this.state.img9,
+          count: count
+        })
+        this.imageChange(num)
+        this.countChange(num)
+        break;
+      case this.state.img9:
+        img = this.state.img0
+        count = 0
+        this.setState({ 
+          image: this.state.img0,
+          count: count
+        })
+        this.imageChange(num)
+        this.countChange(num)
+        break;
+      case this.state.img0:
+        img = this.state.img1
+        count = 1
+        this.setState({ 
+          image: this.state.img1,
+          count: count
+        })
+        this.imageChange(num)
+        this.countChange(num)
+        break;
+      default:
+        return null;
+    }
+  }
+
+  imageChange(num) {
+    if (num == 1) {
+      this.state.image1 = this.state.image
+    } else {
+      if (num == 2) {
+        this.state.image2 = this.state.image
+      } else {
+        this.state.image3 = this.state.image
+      }
+    }
+  }
+
+  countChange(num) {
+    if (num == 1) {
+      this.state.count1 = this.state.count
+    } else {
+      if (num == 2) {
+        this.state.count2 = this.state.count
+      } else {
+        this.state.count3 = this.state.count
+      }
+    }
   }
 
   bettingChange(point) {
@@ -349,7 +276,6 @@ class Rulet extends React.Component {
     }
   }
   
-
   render() {
     return(
       <div className="App" style={{textAlign: "center"}}>
@@ -375,11 +301,9 @@ class Rulet extends React.Component {
         </form>
         <p>1000점 달성시 승리</p>
       </div>
-      
     );
   }
 }
-
 
 ReactDOM.render(
   <Rulet />,

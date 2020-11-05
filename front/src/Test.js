@@ -8,12 +8,16 @@ class Test extends Component {
   
     this.state = {
        data: '',
-       wow2: "hi"
+       wow2: "hi",
+       name1: 'wow'
     }
     this.updateState = this.updateState.bind(this);
     this.clearInput = this.clearInput.bind(this);
     this.test = this.test.bind(this);
     this.testtwo = this.testtwo.bind(this);
+    this.switchTest = this.switchTest.bind(this);
+    this.staticName = this.staticName.bind(this);
+    this.staticHosting = this.staticHosting.bind(this);
  };
  updateState(e) {
     this.setState({data: e.target.value});
@@ -32,6 +36,26 @@ class Test extends Component {
  testtwo(e) {
     alert(this.state.wow + e)
  }
+ switchTest(value) {
+   switch (this.state.wow2) {
+      case "hi":
+         this.state.wow2 = "bye"
+         console.log(this.state.wow2)
+         case "bye":
+            this.state.wow2 = "hi"
+            console.log(this.state.wow2)
+      default:
+         console.log(this.state.wow2)
+   }
+ }
+ 
+ staticHosting() {
+    this.staticName()
+ }
+
+ staticName(name) {
+   console.log(this.state+name)
+ }
  render() {
     return (
        <div>
@@ -41,6 +65,13 @@ class Test extends Component {
           <h4>{this.state.data}</h4>
 
           <button onClick = {this.test}>rorororororo</button>
+
+
+
+
+          <button onClick = {this.switchTest}>switte</button>
+
+          <button onClick = {this.staticHosting}>hosting</button>
        </div>
     );
  }

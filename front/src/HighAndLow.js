@@ -19,19 +19,22 @@ class HighAndLow extends React.Component {
     this.initGame = this.initGame.bind(this);
     this.increaseCount = this.increaseCount.bind(this);
   }
+
   veryEasy() {
     this.state.maxnum = 10
     this.initGame(Math.floor((Math.random() * (this.state.maxnum + 1))));
   }
+
   normal() {
     this.state.maxnum = 100
     this.initGame(Math.floor((Math.random() * (this.state.maxnum + 1))));
   }
+
   hard() {
     this.state.maxnum = 1000
     this.initGame(Math.floor((Math.random() * (this.state.maxnum + 1))));
-
   }
+
   initGame(number) {
     this.state.answer = number
     console.log(number)
@@ -41,6 +44,7 @@ class HighAndLow extends React.Component {
       answerCounter : 0
     })
   }
+
   selection() {
     if (this.refs.answertext.value == Number((this.refs.answertext.value))) {
       if (this.refs.answertext.value > this.state.answer) {
@@ -59,11 +63,13 @@ class HighAndLow extends React.Component {
       this.refs.text.value = "숫자를 입력해주세요."
     }
   }
+
   increaseCount() {
     this.setState({
       answerCounter: this.state.answerCounter += 1
     })
   }
+
   render() {
     return(
       <div>
