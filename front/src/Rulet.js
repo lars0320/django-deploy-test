@@ -21,6 +21,7 @@ class Rulet extends React.Component {
       interval1: null,
       interval2: null,
       interval3: null,
+      stopCount: false,
       stopCount1: 0,
       stopCount2: 0,
       stopCount3: 0,
@@ -42,20 +43,20 @@ class Rulet extends React.Component {
     this.img3Stop = this.img3Stop.bind(this);
     this.stop = this.stop.bind(this);
     this.notProgress = this.notProgress.bind(this);
-    this.imageChange = this.imageChange.bind(this);
-    this.countChange = this.countChange.bind(this);
   }
 
 
   gameStart(point) {
     point.preventDefault();
     if (this.state.progressCount == 0) {
-      this.state.image1 = this.state.img7
-      this.state.image2 = this.state.img7
-      this.state.image3 = this.state.img7
-      this.state.stopCount1 = 0
-      this.state.stopCount2 = 0
-      this.state.stopCount3 = 0
+      this.setState({
+        image1 : this.state.img7,
+        image2 : this.state.img7,
+        image3 : this.state.img7,
+        stopCount1 : 0,
+        stopCount2 : 0,
+        stopCount3 : 0
+      })
       if ( 0 > this.state.score - Number(this.state.betting)) {
         this.setState({
           text: "망했어요 파산했습니다."
@@ -66,157 +67,34 @@ class Rulet extends React.Component {
             text: "당신은 도박의 신입니다!"
           })
         } else {
-          this.state.progressCount = 1
-          this.state.score = this.state.score - Number(this.state.betting)
           this.setState({
-            text : "배팅후 점수는"+this.state.score+"점 이구요, "+this.state.betting+"배팅하셨네요"
+            progressCount : 1,
+            score : this.state.score - Number(this.state.betting),
+            text : "배팅후 점수는"+(this.state.score-Number(this.state.betting))+"점 이구요, "+this.state.betting+"배팅하셨네요"
           })
-          this.state.interval1 = setInterval(( ) => {
-            this.ruletrun(this.state.image1, this.state.count1, 1)
+          this.state.interval1 = setInterval(() => {
+            this.ruletrun(1)
           }, 40);
           this.state.interval2 = setInterval(() => {
-            this.ruletrun(this.state.image2, this.state.count2, 2)
+            this.ruletrun(2)
           }, 35);
           this.state.interval3 = setInterval(() => {
-            this.ruletrun(this.state.image3, this.state.count3, 3)
+            this.ruletrun(3)
           }, 30);
         }
       }
     } else {
       return null;
     }
-
   }
 
-  ruletrun(img, count, num) {
-    switch (img) {
-      case this.state.img1:
-        img = this.state.img2
-        count = 2
-        this.setState({ 
-          image: this.state.img2,
-          count: count
-        })
-        this.imageChange(num)
-        this.countChange(num)
-        break;
-      case this.state.img2:
-        img = this.state.img3
-        count = 3
-        this.setState({ 
-          image: this.state.img3,
-          count: count
-        })
-        this.imageChange(num)
-        this.countChange(num)
-        break;
-      case this.state.img3:
-        img = this.state.img4
-        count = 4
-        this.setState({ 
-          image: this.state.img4,
-          count: count
-        })
-        this.imageChange(num)
-        this.countChange(num)
-        break;
-      case this.state.img4:
-        img = this.state.img5
-        count = 5
-        this.setState({ 
-          image: this.state.img5,
-          count: count
-        })
-        this.imageChange(num)
-        this.countChange(num)
-        break;
-      case this.state.img5:
-        img = this.state.img6
-        count = 6
-        this.setState({ 
-          image: this.state.img6,
-          count: count
-        })
-        this.imageChange(num)
-        this.countChange(num)
-        break;
-      case this.state.img6:
-        img = this.state.img7
-        count = 7
-        this.setState({ 
-          image: this.state.img7,
-          count: count
-        })
-        this.imageChange(num)
-        this.countChange(num)
-        break;
-      case this.state.img7:
-        img = this.state.img8
-        count = 8
-        this.setState({ 
-          image: this.state.img8,
-          count: count
-        })
-        this.imageChange(num)
-        this.countChange(num)
-        break;
-      case this.state.img8:
-        img = this.state.img9
-        count = 9
-        this.setState({ 
-          image: this.state.img9,
-          count: count
-        })
-        this.imageChange(num)
-        this.countChange(num)
-        break;
-      case this.state.img9:
-        img = this.state.img0
-        count = 0
-        this.setState({ 
-          image: this.state.img0,
-          count: count
-        })
-        this.imageChange(num)
-        this.countChange(num)
-        break;
-      case this.state.img0:
-        img = this.state.img1
-        count = 1
-        this.setState({ 
-          image: this.state.img1,
-          count: count
-        })
-        this.imageChange(num)
-        this.countChange(num)
-        break;
-      default:
-        return null;
-    }
-  }
-
-  imageChange(num) {
-    if (num == 1) {
-      this.state.image1 = this.state.image
-    } else {
-      if (num == 2) {
-        this.state.image2 = this.state.image
-      } else {
-        this.state.image3 = this.state.image
-      }
-    }
-  }
-
-  countChange(num) {
-    if (num == 1) {
-      this.state.count1 = this.state.count
-    } else {
-      if (num == 2) {
-        this.state.count2 = this.state.count
-      } else {
-        this.state.count3 = this.state.count
-      }
-    }
+  ruletrun(wheelNum) {
+    const currentNumber = this.state['count' + wheelNum]; 
+    const nextNumber = (currentNumber + 1) % 10         
+    const state = {}                                      
+    state['image' + wheelNum] = '/static/' + nextNumber + '.gif'  
+    state['count' + wheelNum] = nextNumber
+    this.setState(state);
   }
 
   bettingChange(point) {
@@ -240,11 +118,12 @@ class Rulet extends React.Component {
       if (count == 0){
         clearInterval(interval)
         this.confirm(num)
-        if (this.state.stopCount1 + this.state.stopCount2 + this.state.stopCount3 == 3){
+        console.log(this.state.stopCount1, this.state.stopCount2, this.state.stopCount3)
+        if (this.state.stopCount1 + this.state.stopCount2 + this.state.stopCount3 == 2){
           if (this.state.count1 == this.state.count2 && this.state.count2 == this.state.count3) {
-            this.state.score = this.state.score + this.state.betting * 6
             this.setState({
-              text : "ㅊㅋㅊㅋ~ "+this.state.betting * 5+"점 먹었구요    점수는 : " + this.state.score + "점"
+              score : this.state.score + this.state.betting * 6,
+              text : "ㅊㅋㅊㅋ~ "+this.state.betting * 5+"점 먹었구요    점수는 : " + (this.state.score + this.state.betting * 6) + "점"
             })
             this.notProgress()
           } else {
@@ -261,19 +140,16 @@ class Rulet extends React.Component {
   }
 
   notProgress() {
-    this.state.progressCount = 0
+    this.setState({
+      progressCount: 0
+    })
   }
 
   confirm(num) {
-    if (num == 1) {
-      this.state.stopCount1 = 1
-    } else {
-      if (num == 2) {
-        this.state.stopCount2 = 1
-      } else {
-        this.state.stopCount3 = 1
-      }
-    }
+    console.log(num)
+    const stopCount = {}
+    stopCount["stopCount" + num] = 1
+    this.setState(stopCount)
   }
   
   render() {

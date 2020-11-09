@@ -30,8 +30,8 @@ class Counter extends React.Component {
         })
         if (this.state.number == 150) {
           clearInterval(this.state.interval)
-          this.state.switch = "off"
           this.setState({
+            switch: "off",
             end: this.state.number
           })
           alert("너무 늦었어요")
@@ -39,13 +39,15 @@ class Counter extends React.Component {
           null;
         }
       }, this.state.speed3)
-      this.state.switch = "on"
+      this.setState({
+        switch: "on"
+      })
     } else {
       if ( this.state.switch == "on") {
         if ( this.state.number >= 98) {
           clearInterval(this.state.interval)
-          this.state.switch = "off" 
           this.setState({
+            switch: "off",
             end: this.state.number
           })
           if ( 100 >= this.state.number) {
@@ -55,8 +57,8 @@ class Counter extends React.Component {
           }
         } else {
           clearInterval(this.state.interval)
-          this.state.switch = "off"
           this.setState({
+            switch: "off",
             end: this.state.number
           })
           alert("아쉽네요")
@@ -71,10 +73,10 @@ class Counter extends React.Component {
     clearInterval(this.state.interval)
     this.setState({
       number: 0,
-      end: 0
+      end: 0,
+      switch: "off",
+      speed: 100
     })
-    this.state.switch = "off"
-    this.state.speed = 100
   }
 
   stop() {

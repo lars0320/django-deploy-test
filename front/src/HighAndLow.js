@@ -21,28 +21,34 @@ class HighAndLow extends React.Component {
   }
 
   veryEasy() {
-    this.state.maxnum = 10
+    this.setState({
+      maxnum: 10
+    })
     this.initGame(Math.floor((Math.random() * (this.state.maxnum + 1))));
   }
 
   normal() {
-    this.state.maxnum = 100
+    this.setState({
+      maxnum: 100
+    })
     this.initGame(Math.floor((Math.random() * (this.state.maxnum + 1))));
   }
 
   hard() {
-    this.state.maxnum = 1000
+    this.setState({
+      maxnum: 1000
+    })
     this.initGame(Math.floor((Math.random() * (this.state.maxnum + 1))));
   }
 
   initGame(number) {
-    this.state.answer = number
-    console.log(number)
-    this.refs.text.value = "0부터 "+ this.state.maxnum +"까지 숫자를 입력해 주세요."
-    this.refs.answertext.value = null
     this.setState({
+      answer: number,
       answerCounter : 0
     })
+    this.refs.text.value = "0부터 "+ this.state.maxnum +"까지 숫자를 입력해 주세요." 
+    this.refs.answertext.value = null                                        
+    console.log(number)
   }
 
   selection() {
