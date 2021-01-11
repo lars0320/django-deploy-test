@@ -3,11 +3,24 @@
   <head>
     <meta charset="UTF-8">
     <title>룰렛게임</title>
+    <style>
+      body{
+        background-color: ivory;
+      }
+    </style>
+    <script>
+      {% autoescape off %}
+        var records = {{ records }}
+        var csrfToken = "{{csrf_token}}"
+       
+      {% endautoescape %}
+  </script>
   </head>
 
   <body>
     <div id="rulet">
     </div>
-  </body>
+  {% load static %}
   <script src="{% static "Rulet.js" %}"></script>
+  </body>
 </html>

@@ -6,11 +6,14 @@ module.exports = {
   context: __dirname,
   mode: 'development',
   entry: {
+    'Profile': "./src/Profile.js",
+    'Resume': "./src/Resume.js",
     'Index': "./src/Index.js",
     'Rulet': "./src/Rulet.js",
     'HighAndLow': "./src/HighAndLow.js",
     'Counter': "./src/Counter.js",
-    'Test': "./src/Test.js",
+    'Blog': "./src/Blog.js",
+    'Posting': "./src/Posting.js"
   },
   output: {
     path: __dirname + '/../static/',
@@ -63,7 +66,7 @@ module.exports = {
         loaders: ['style-loader', 'css-loader', 'less-loader']
       }
     ],
-  },
+  },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 }
 
 

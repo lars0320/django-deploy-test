@@ -1,14 +1,34 @@
-{% load static %}
+
 <html>
   <head>
     <meta charset="UTF-8">
     <title>크거나작거나</title>
+    <style>
+      body{
+        background-color: ivory;
+      }
+      .marginLeft500{
+        margin-left: 500;
+      }
+      .marginLeft400{
+        margin-left: 400;
+      }
+     
+    </style>
+    <script>
+      {% autoescape off %}
+        var records = {{ records }}
+        var csrfToken = "{{csrf_token}}"
+       
+      {% endautoescape %}
+  </script>
   </head>
 
   <body>
     <div>
     <div id="highandlow">
     </div>
+    {% load static %}
     <script src="{% static "HighAndLow.js" %}"></script>
     </div>
   </body>

@@ -1,59 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>金秀慜(Kim Soomin)</title>
-</head>
-<body>
-<img src="/static/131.jpg" alt="?" style="float:left;width:300px;height:300px;">
-<div style="margin: 0px 0px 0px 350px;">
-<h1>
-<ruby>
-<rb>김</rb><rp><rt>Kim</rt></rp>
-<rb>수</rb><rp><rt>Soo</rt></rp>
-<rb>민</rb><rp><rt>Min</rt></rp>
-</ruby>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-</h1>
-<p>
-Hello, I’m Kim Soomin living in Busan. I am currently working at Doverman.
-<br>This is my resume. -> <a href="./resume">Resume</a>
-</p>
-<br>
-</div>
-<li style="margin: 0px 0px 0px 330px;"><a href="./blog"><ruby>金秀慜<rp>(</rp><rt>김수민</rt><rp>)</rp></ruby> 블로그</a></li>
-<li style="margin: 0px 0px 0px 330px;"><a href="./index"><ruby>金秀慜<rp>(</rp><rt>김수민</rt><rp>)</rp></ruby>창작마당</a></li>
-<div style="margin: 0px 0px 0px 350px;">
-<br>
-<h2>favorite everything</h2>
-<p></p>
-</div>
-<div style="margin: 0px 0px 0px 330px;">
-<li>Family</li>
-<li>Friend</li>
-<li>Chicken</li>
-<li>Game</li>
-<li>Song</li>
-<li>Computer</li>
-<li>Youtube</li>
-</div>
-<div style="margin: 0px 0px 0px 350px;">
-<h2>Contact</h2>
-<p>The best method to contact with me is by E-mail > mini03200@naver.com < <br>
-</p>
-</div>
-<div style="margin: 0px 0px 0px 350px;">
-<h2><a id="Open">What I want to happen</a></h2>
-</div>
-<div style="margin: 0px 0px 0px 330px;">
-<li>winning a lottery</li>
-<li>Obtaining a license</li>
-<li>Getting good at work</li>
-<li>Be healthy together</li>
-<li>Go to LoL Challenger</li>
-</div>
-<div style="margin: 0px 0px 0px 350px;">
-<p>There is no specific content, but thank you for reading this far.</p>
-</div>
-</body>
+    <title>KimSoomin</title>
+    <style>
+      body{
+        background-color: ivory;
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <div id="profile">
+    </div>
+  {% load static %}
+  <script src="{% static "Profile.js" %}"></script>
+  </body>
 </html>

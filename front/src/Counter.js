@@ -1,111 +1,181 @@
 //카운터 게임
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM, { render } from 'react-dom';
+import API from 'apisauce';
+
+const apiCall = API.create({
+  headers: {
+    "csrfmiddlewaretoken": csrfToken,
+    'X-CSRF-Token': csrfToken,
+    'X-CSRFToken': csrfToken,
+    dataType: "html",
+  }
+})
 
 class Counter extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      number : 0,
-      end: '',
-      interval : null,
-      switch : "off",
-      speed1 : 300 ,
-      speed2 : 100 ,
-      speed3 : 10
+      increaseNumber : 0,  
+      resultNumber: "",  
+      interval : null,  
+      run : false,
+      records : this.props.records,
     }
     this.start = this.start.bind(this);
-    this.reStart = this.reStart.bind(this);
+    this.run = this.run.bind(this);
+    this.counterIncrease = this.counterIncrease.bind(this);
+    this.reset = this.reset.bind(this);
+    this.timeOver = this.timeOver.bind(this);
     this.stop = this.stop.bind(this);
-  }
-  start() {
-    if (this.state.switch == "off") {
-      this.setState({
-        number: 0,
-        end: 0
-      })
-      this.state.interval = setInterval(() => {
-        this.setState({
-          number: this.state.number + 1
-        })
-        if (this.state.number == 150) {
-          clearInterval(this.state.interval)
-          this.setState({
-            switch: "off",
-            end: this.state.number
-          })
-          alert("너무 늦었어요")
-        } else {
-          null;
-        }
-      }, this.state.speed3)
-      this.setState({
-        switch: "on"
-      })
-    } else {
-      if ( this.state.switch == "on") {
-        if ( this.state.number >= 98) {
-          clearInterval(this.state.interval)
-          this.setState({
-            switch: "off",
-            end: this.state.number
-          })
-          if ( 100 >= this.state.number) {
-            alert("대단합니다")
-          } else {
-            alert("아쉽네요")
-          }
-        } else {
-          clearInterval(this.state.interval)
-          this.setState({
-            switch: "off",
-            end: this.state.number
-          })
-          alert("아쉽네요")
-        }
-      } else {
-        null;
-      }
-    }
+    this.win = this.win.bind(this);
+    this.lose = this.lose.bind(this);
+    this.end = this.end.bind(this);
+    this.resultAlert = this.resultAlert.bind(this);
+    this.enterName = this.enterName.bind(this);
   }
 
-  reStart() {
+  start() {
+    this.reset() 
+    this.run()
+  }
+
+  run() {
+    this.setState({
+      run: true,
+      interval : setInterval(() => {
+        this.counterIncrease()
+        if (this.state.increaseNumber === 150) {
+          this.stop()
+        }
+      }, 10)
+    })
+  }
+  
+  counterIncrease() {
+    this.setState({ 
+      increaseNumber: this.state.increaseNumber + 1
+    })
+  }
+
+  reset() { 
     clearInterval(this.state.interval)
     this.setState({
-      number: 0,
-      end: 0,
-      switch: "off",
-      speed: 100
+      increaseNumber: 0,
+      resultNumber: 0,
+      run: false
     })
   }
 
   stop() {
-    if (this.state.number == 150) {
-      clearInterval(this.state.interval)
+    this.resultAlert()
+    this.end()
+  }
+
+  end() {
+    clearInterval(this.state.interval)
+    this.setState({
+      resultNumber: this.state.increaseNumber,
+      run: false
+    })
+  }
+
+  resultAlert() {
+    if ( this.state.increaseNumber >= 98 && 100 >= this.state.increaseNumber ) {
+      return this.win()
+    }
+    if ( this.state.increaseNumber === 150 ) {
+      return this.timeOver()
+    }
+    return this.lose()
+  }
+
+  enterName() {
+    const userName = prompt('당신의 이름은 무엇입니까?')
+    if ( !userName == "" ) {
+      apiCall.post("/index/counter/score/", userName)
+      .then( response => {
+        this.setState({
+          records: response.data.records
+        });
+      })
     } else {
-      null;
+      alert("이름을 입력해주세요")
+      this.enterName()
     }
   }
 
+  timeOver() {
+    alert("너무늦었어요")
+  }
+
+  win() {
+    alert("대단합니다")
+    this.enterName()
+  }
+
+  lose() {
+    alert("아쉽네요")
+  }
+
   render() {
+    const userName = []
     return(
       <div>
-        <div>
+        <div style={{textAlign: "center"}}>
           <h1>The Count Game</h1>
-          <button onClick={this.start}>{this.state.number}</button>
-          <input type="text" size="10" value={this.state.end}></input>
-          <button onClick={this.reStart}>Restart</button>
+          {this.state.run === false ? (
+            <button onClick={this.start}>
+              시작
+            </button>
+          ) : (
+            <button onClick={this.stop}>
+              {this.state.increaseNumber}
+            </button>
+          )}
+          <input type="text" size="10" 
+            value={this.state.resultNumber}>
+          </input>
+          <button onClick={this.reset}>Reset Game</button>
+          <br/><br/><br/>
+          <p>버튼을 누르면 숫자가 증가합니다. <br/>
+          다시 버튼을 눌렀을때 숫자가 98에서 100사이면 승리
+          <br/><br/><br/><br/><br/><br/><br/><br/>
+          </p>
+          <h1> 명예의 전당 </h1>
+            
+          {this.state.records.map((record) => {
+            const name = record.name
+            if ( userName.find(userName => userName.name === name) ) {
+              const plusScore = userName.find(userName => userName.name === name)
+              plusScore.score += 1
+            } else {
+              userName.push(
+                {name: name, score: 1}
+              )
+            }
+          })}
         </div>
-        <br/><br/><br/>
-        <p>왼쪽박스에 있는 숫자 0 을 클릭하면 1부터 150까지 카운터 <br/>
-         됩니다. 이때 98에서 100까지 숫자만큼 왔을때 카운터 되는 <br/>
-         숫자를 클릭해서 98~100사이에 들어오면 승리하는 게임입니다.</p>
+        <div style={{marginLeft:640}}>
+          {userName.map((record) => {
+            return(
+              <li>
+                {record.name} &nbsp;&nbsp;&nbsp;&nbsp; {record.score}점
+              </li>
+            )
+          })}
+        </div>
       </div>
-    );
+    )
   }
 }
 
-
+  
 ReactDOM.render(
-  <Counter />,
-  document.getElementById('counter'));                                                                                                         
+  <Counter
+  records = {records}
+  csrfToken = {csrfToken}
+  />,
+  document.getElementById('counter')); 
+
+  

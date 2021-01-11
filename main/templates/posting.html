@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>게시글</title>
+  <style>
+    a:link { color: black; text-decoration: none;}
+    a:visited { color: black; text-decoration: none;}
+    a:hover { color: black; text-decoration: underline;}
+    nav{float:right;text-align:right;font-size:14px;margin-right: 300px;}
+    div{background-color: rgba(255, 255, 255, 0.1)}
+    aside{width: 30%; float: right; border-left: 3px solid silver; color: slategray}
+    body {
+      font-family: 'Nanum Gothic', 'Noto Sans KR', sans-serif;
+      color: #0f0f0f;
+      background-color: ivory;
+    }
+    #base {margin-left: 50px;}
+    li{list-style: none; padding-left: 10px;}
+    pre{font-size: 15px; }
+    h2 { font-size: 32px;}
+    textarea {border: 2px solid silver;}
+</style>
+</head>
+<script>
+        {% autoescape off %}
+          var comments = {{ comments }}
+          var postings = {{ postings }}
+          var id = {{ id }}
+          var csrfToken = "{{csrf_token}}"
+        {% endautoescape %}                                     
+    </script>
+<body>
+
+<div>
+  <div id="posting"></div>
+  {% load static %}
+  <script src="{% static "Posting.js" %}"></script>
+  </div>
+
+</body>
+</head>
+</html>

@@ -1,14 +1,25 @@
-{% load static %}
 <html>
   <head>
     <meta charset="UTF-8">
     <title>카운터게임</title>
+    <style>
+      body{
+        background-color: ivory;
+      }
+    </style>
+    <script>
+      {% autoescape off %}
+        var records = {{ records }}
+        var csrfToken = "{{csrf_token}}"
+       
+      {% endautoescape %}
+  </script>
   </head>
 
   <body>
     <div>
-    <div id="counter">
-    </div>
+    <div id="counter"></div>
+    {% load static %}
     <script src="{% static "Counter.js" %}"></script>
     </div>
   </body>
